@@ -36,3 +36,4 @@ describe('ContactsScreen', () => {
     expect(await findByText('Pharmacy A')).toBeTruthy();
   });
 });
+

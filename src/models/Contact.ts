@@ -1,1 +1,8 @@
-export interface Contact {\n  id: string;\n  name: string;\n  role: 'doctor' | 'family' | 'caregiver' | 'pharmacy' | 'other';\n  phone?: string;\n  email?: string;\n  notes?: string;\n}\n
+export interface Contact {
+  id: string;
+  name: string;
+  role: 'doctor' | 'family' | 'caregiver' | 'pharmacy' | 'other';
+  phone?: string;
+  email?: string;
+  notes?: string;
+}

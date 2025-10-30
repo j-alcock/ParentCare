@@ -1,1 +1,7 @@
-export interface Message {\n  id: string;\n  sender: 'patient' | 'primary' | 'caregiver';\n  text: string;\n  timestampISO: string;\n  read?: boolean;\n}\n
+export interface Message {
+  id: string;
+  sender: 'patient' | 'primary' | 'caregiver';
+  text: string;
+  timestampISO: string;
+  read?: boolean;
+}

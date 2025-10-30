@@ -21,3 +21,4 @@ export async function updateList<T extends { id: string }>(key: string, updater:
   await saveItem<T[]>(key, next);
   return next;
 }
+
