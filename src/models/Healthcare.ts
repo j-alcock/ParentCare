@@ -1,0 +1,1 @@
+export interface Medication {\n  id: string;\n  name: string;\n  dosage?: string;\n  schedule?: string;\n  notes?: string;\n}\n\nexport interface Appointment {\n  id: string;\n  title: string;\n  location?: string;\n  datetimeISO: string;\n  notes?: string;\n}\n
