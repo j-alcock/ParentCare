@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="capGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6a623"/>
+      <stop offset="100%" stop-color="#f08a00"/>
+    </linearGradient>
+    <linearGradient id="bottleGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ffb347"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 28px 'Helvetica Neue', Arial, sans-serif; fill: #111 }
+      .label { font: 600 22px 'Helvetica Neue', Arial, sans-serif; fill: #111 }
+      .value { font: 400 22px 'Helvetica Neue', Arial, sans-serif; fill: #333 }
+      .small { font: 400 18px 'Helvetica Neue', Arial, sans-serif; fill: #444 }
+      .mono  { font: 600 22px 'Menlo', monospace; fill: #111 }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="800" fill="#f5f7fb"/>
+
+  <!-- Pill bottle body -->
+  <rect x="180" y="120" width="840" height="560" rx="30" fill="url(#bottleGrad)" stroke="#e28a1f" stroke-width="4"/>
+
+  <!-- White label area -->
+  <rect x="220" y="220" width="760" height="440" rx="16" fill="#fff" stroke="#e6e6e6" stroke-width="2"/>
+
+  <!-- Cap -->
+  <rect x="180" y="80" width="840" height="70" rx="10" fill="url(#capGrad)" stroke="#e28a1f" stroke-width="4"/>
+
+  <!-- Pharmacy header row -->
+  <text x="240" y="260" class="title">Local Pharmacy</text>
+  <text x="240" y="290" class="small">123 Main Street, Anytown, USA 11111 · (800) 555-5555</text>
+  <text x="870" y="260" class="small">Dr. C. Jones</text>
+
+  <!-- Divider -->
+  <line x1="230" y1="305" x2="970" y2="305" stroke="#eaeaea" stroke-width="2"/>
+
+  <!-- Rx block -->
+  <text x="240" y="340" class="label">Rx#:</text>
+  <text x="300" y="340" class="mono">0060023-08291</text>
+  <text x="780" y="340" class="label">Filled:</text>
+  <text x="860" y="340" class="value">06/23/2009</text>
+
+  <!-- Patient -->
+  <text x="240" y="380" class="label">Patient:</text>
+  <text x="335" y="380" class="value">Jane Smith</text>
+  <text x="240" y="410" class="small">456 Main Street, Anytown, US 11111</text>
+
+  <!-- Medication name/strength/form -->
+  <text x="240" y="455" class="title">AMOXICILLIN 500MG CAPSULES</text>
+
+  <!-- Directions (SIG) -->
+  <text x="240" y="490" class="label">Directions:</text>
+  <text x="360" y="490" class="value">TAKE ONE CAPSULE BY MOUTH THREE TIMES DAILY FOR 10 DAYS</text>
+  <text x="360" y="520" class="small">Take with food</text>
+
+  <!-- Quantity / Refill -->
+  <text x="240" y="560" class="label">Qty:</text>
+  <text x="290" y="560" class="value">30</text>
+  <text x="360" y="560" class="label">Refills:</text>
+  <text x="440" y="560" class="value">0 (Auth required)</text>
+
+  <!-- Dates -->
+  <text x="240" y="595" class="label">Use before:</text>
+  <text x="360" y="595" class="value">06/23/2012</text>
+
+  <!-- Manufacturer / NDC -->
+  <text x="240" y="630" class="small">MFG: ACME Pharma · NDC: 12345-6789-00 · Pill: 2 71 OVAL WHITE</text>
+
+  <!-- Barcode placeholder -->
+  <rect x="930" y="330" width="30" height="290" fill="#000"/>
+  <rect x="935" y="330" width="5" height="290" fill="#fff"/>
+  <rect x="942" y="330" width="3" height="290" fill="#fff"/>
+  <rect x="950" y="330" width="4" height="290" fill="#fff"/>
+  <rect x="958" y="330" width="2" height="290" fill="#fff"/>
+  <rect x="965" y="330" width="5" height="290" fill="#fff"/>
+  <rect x="973" y="330" width="3" height="290" fill="#fff"/>
+
+  <!-- Footer caution -->
+  <text x="220" y="690" class="small">Federal law prohibits transfer of this drug to any person other than the patient for whom prescribed.</text>
+</svg>
+
+
