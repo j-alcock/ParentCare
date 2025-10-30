@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, Alert } from 'react-native';
 import { Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { SvgUri } from 'react-native-svg';
-import { captureRef } from 'react-native-view-shot';
+// Sample image uses a bundled PNG; no SVG conversion at runtime
 
 const PillBottleCaptureScreen = () => {
   const [imageUri, setImageUri] = React.useState<string | null>(null);
@@ -11,7 +10,8 @@ const PillBottleCaptureScreen = () => {
   const requestAndOpenCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
-      Alert.alert('Permission required', 'Camera permission is needed to capture the pill bottle.');
+      // Silent fallback to library on simulators or if permission denied
+      await openLibrary();
       return;
     }
     try {
@@ -21,18 +21,10 @@ const PillBottleCaptureScreen = () => {
         return;
       }
     } catch (e) {
-      // fallthrough to library
+      // Camera not available (e.g., simulator) → silent fallback to library
+      await openLibrary();
+      return;
     }
-    Alert.alert(
-      'Camera unavailable',
-      'Falling back to photo library (simulator stub).',
-      [
-        {
-          text: 'OK',
-          onPress: () => openLibrary(),
-        },
-      ]
-    );
   };
 
   const openLibrary = async () => {
@@ -47,25 +39,17 @@ const PillBottleCaptureScreen = () => {
     }
   };
 
-  const svgContainerRef = React.useRef<View>(null);
+  // no SVG/bitmap conversion anymore
 
-  const createBitmapFromSvgSample = async () => {
+  const useBundledSamplePng = () => {
     try {
-      // Render a hidden SVG and capture it to a PNG for OCR compatibility
-      const resolved = (Image as any).resolveAssetSource(
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        require('../../assets/pill-bottle-sample.svg')
-      );
-      if (!resolved?.uri) {
-        Alert.alert('Sample not found', 'Could not resolve sample SVG asset.');
-        return;
-      }
-      // Ensure the view is laid out before capture
-      await new Promise((r) => setTimeout(r, 50));
-      const uri = await captureRef(svgContainerRef, { format: 'png', quality: 1 });
-      setImageUri(uri);
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const sample = require('../../assets/pill-bottle-sample.png');
+      const resolved = (Image as any).resolveAssetSource(sample);
+      if (resolved?.uri) setImageUri(resolved.uri);
+      else throw new Error('No URI');
     } catch (e) {
-      Alert.alert('Sample failed', 'Unable to generate sample image.');
+      Alert.alert('Sample not found', 'Please add assets/pill-bottle-sample.png to use the bundled sample.');
     }
   };
 
@@ -80,16 +64,12 @@ const PillBottleCaptureScreen = () => {
         <Text>Use Photo Library (Simulator Stub)</Text>
       </TouchableOpacity>
       <View style={{ height: 8 }} />
-      <TouchableOpacity onPress={createBitmapFromSvgSample} style={{ paddingHorizontal: 16, paddingVertical: 10, borderRadius: 8, backgroundColor: '#eee', alignSelf: 'flex-start' }}>
+      <TouchableOpacity onPress={useBundledSamplePng} style={{ paddingHorizontal: 16, paddingVertical: 10, borderRadius: 8, backgroundColor: '#eee', alignSelf: 'flex-start' }}>
         <Text>Use Sample Image (Bundled)</Text>
       </TouchableOpacity>
       {Platform.OS === 'ios' ? (
         <Text style={{ marginTop: 8, color: '#555' }}>Tip: On iOS Simulator, use the library option.</Text>
       ) : null}
-      {/* Hidden SVG render target for view-shot capture */}
-      <View ref={svgContainerRef} style={{ position: 'absolute', left: -10000, top: -10000, width: 1000, height: 650, backgroundColor: '#fff' }}>
-        <SvgUri width="1000" height="650" uri={(Image as any).resolveAssetSource(require('../../assets/pill-bottle-sample.svg')).uri} />
-      </View>
       {imageUri ? (
         <View style={{ marginTop: 16 }}>
           <Image source={{ uri: imageUri }} style={{ width: '100%', height: 300, borderRadius: 8 }} />

@@ -16,11 +16,18 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.jalcock.parentcare",
       "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to capture pill bottle labels and medication lists.",
+        "NSPhotoLibraryUsageDescription": "This app accesses your photo library to select images for processing.",
+        "NSPhotoLibraryAddUsageDescription": "This app may save generated images to your library.",
         "NSContactsUsageDescription": "This app accesses contacts to import caregiver and provider information.",
         "NSCalendarsUsageDescription": "This app accesses calendars to show and create healthcare appointments."
       }
     },
     "android": {
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
